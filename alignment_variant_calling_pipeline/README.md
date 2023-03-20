@@ -85,29 +85,35 @@ For a input genomic interval, generates a GATK GenomicsDB file for a set of samp
 ### Inputs
 * `filePath`: The path to the directory containing the 25 sample maps generated in [step 5](#5-creating-sample-maps)
 * `chromosome`: The chromosome of the input genomic interval
-* `marginedStart`: The margined start position of the input genomic interval
-* `marginedEnd`: The margined end position of the input genomic interval
+* `marginedStart`: The margined start position of the input genomic interval (1kb upstream of interval start position)
+* `marginedEnd`: The margined end position of the input genomic interval (1kb downstream of interval end position)
 * `interval`: The name of the interval, to be used in output files
 * `regionType`: Either "non_PAR", "PAR1", or "PAR2" based on which of these categories the input region falls under
 
 ### Outputs
 * `genomicsDBtar`: A tar file containing the genomicsDB information for the input interval across the samples specified in the sample map
 
+## 7. `interval_calling` Workflow
+For a input genomic interval, uses the GenomicsDB created in [step 6](#6-generate_genomics_db-workflow) to perform joint genotyping across all samples in the GenomicsDB file. The output interval VCFs will be merged into single chromosome VCFs in the next step.
+
+### Inputs
+* `chromosome`: The chromosome of the input genomic interval
+* `start`: The start position of the input genomic interval
+* `end`: The end position of the input genomic interval
+* `marginedStart`: The margined start position of the input genomic interval (1kb upstream of interval start position)
+* `marginedEnd`: The margined end position of the input genomic interval (1kb downstream of interval end position)
+* `interval`: The name of the interval, to be used in output files
+* `genomicsDBtar`: The output genomicsDB tar file from [step 6](#6-generate_genomics_db-workflow) corresponding to the input interval
+* `refFasta`, `refIndex`, `refDict`: The unmasked reference and indicies (used as input in [step 1](#1-prepare_reference-workflow))
+
+### Outputs
+* `genotypeIntervalVCF`: The output VCF for the input interval
+* `genotypedIntervalVCFgz`: The gzipped output VCF for the input interval
+* `genotypedIntervalVCFtabix`: The tabix index for the output interval VCF
 
 
 
 <!-- 
-## 6. `interval_calling` Workflow
-- You should run this workflow with the `PAR_interval` data table, same as Step 5.
-
-### Inputs
-- `chromosome`, `interval`, `marginedStart`, `marginedEnd`, `start`, `end`: The appropriate columns from the Data Table. These should not need to be changed.
-- `genomicsDBtar`: The name of the column created in Step 5.
-- `refFasta`, `refDict`, `refIndex`: These are absolute file paths to files Samantha uploaded. You should not need to change these.
-
-### Outputs
-- `genotypeIntervalVCF`, `genotypedIntervalVCFgz`, `genotypedIntervalVCFtabix`: The columns in the `PAR_interval` data table to store the outputs to. As with Step 5, these **SHOULD** be new columns, for whichever set of samples you chose to run.
-
 ## 7. `concat_vcfs_chromosome` Workflow
 - You should run this workflow with the `PAR_interval_set` data table. This is a bit different than `PAR_interval`.  Instead, it notes all the intervals in `PAR_interval` belonging to each chromosome. You can run the workflow on a single chromosome at a time, or all chromosomes at once (select `Choose existing sets of PAR_interval_sets`).
 

@@ -21,7 +21,7 @@ From a single unmasked reference, creates two separate masked references: one ea
 * `XYrefIndex`: Fasta index for XY-specific reference
 
 ## 2. `bwaIndex` Workflow
-For an input reference, create a BWA index for alignment. This workflow should be run on each of the karyotype-specific references created in [step 1](#1-prepare_reference-workflow).
+For an input reference, creates a BWA index for alignment. This workflow should be run on each of the karyotype-specific references created in [step 1](#1-prepare_reference-workflow).
 
 ### Inputs
 * `fasta`: The input reference genome
@@ -30,7 +30,7 @@ For an input reference, create a BWA index for alignment. This workflow should b
 * `bwa_index`: The BWA index for the input reference
 
 ## 3. `t2t_realignment` Workflow
-This workflow performs alignment for a single sample, outputting a compressed CRAM file, as well as samtools stats and mosdepth stats.
+For a given sample, performs alignment with BWA, outputting a compressed CRAM file, as well as samtools stats and mosdepth stats.
 
 ### Inputs
 * `sampleName`: The name of the selected sample, to be used in output files
@@ -46,7 +46,7 @@ This workflow performs alignment for a single sample, outputting a compressed CR
 * : `samtools_stats`: Output of running `samtools stats` on alignment CRAM file
 
 ## 4. `haplotype_calling` Workflow
-For a single sample, run the GATK `HaplotypeCaller` tool to call variants in that sample.
+For a single sample, runs the GATK `HaplotypeCaller` tool to call variants in that sample.
 
 ### Inputs
 * `sampleName`: The name of the selected sample, to be used in output files
@@ -94,7 +94,7 @@ For a input genomic interval, generates a GATK GenomicsDB file for a set of samp
 * `genomicsDBtar`: A tar file containing the genomicsDB information for the input interval across the samples specified in the sample map
 
 ## 7. `interval_calling` Workflow
-For a input genomic interval, uses the GenomicsDB created in [step 6](#6-generate_genomics_db-workflow) to perform joint genotyping across all samples in the GenomicsDB file. The output interval VCFs will be merged into single chromosome VCFs in the next step.
+For a input genomic interval, runs the GATK `GenotypeGVCFs` tool with the GenomicsDB created in [step 6](#6-generate_genomics_db-workflow) to perform joint genotyping across all samples in the GenomicsDB file. The output interval VCFs will be merged into single chromosome VCFs in the next step.
 
 ### Inputs
 * `chromosome`: The chromosome of the input genomic interval
@@ -111,20 +111,23 @@ For a input genomic interval, uses the GenomicsDB created in [step 6](#6-generat
 * `genotypedIntervalVCFgz`: The gzipped output VCF for the input interval
 * `genotypedIntervalVCFtabix`: The tabix index for the output interval VCF
 
+## 8. `concat_vcfs_chromosome` Workflow
+For a single chromosome, merges the VCFs for all intervals (from [step 7](#7-interval_calling-workflow)) on that chromosome into a single VCF. Note: You no longer need to distinguish between the PAR and non-PAR regions of chrX or chrY.
+
+### Inputs
+* `chromosome`: The input chromosome
+* `VCFs`: An array containing the names of all of the interval VCFs (gzipped) generated from [step 7](#7-interval_calling-workflow) for intervals on the input chromosome
+* `indexes`: An array containing the names of all the tabix indicies corresponding to the files in the `VCFs` array
+
+### Outputs
+* `chromosomeVCF`: The output VCF for the input chromosome
+* `chromosomeVCF_gz`: The gzipped output VCF for the input chromosome
+* `chromosomeVCF_tbi`: The tabix index for the output chromosome VCF
+
+
 
 
 <!-- 
-## 7. `concat_vcfs_chromosome` Workflow
-- You should run this workflow with the `PAR_interval_set` data table. This is a bit different than `PAR_interval`.  Instead, it notes all the intervals in `PAR_interval` belonging to each chromosome. You can run the workflow on a single chromosome at a time, or all chromosomes at once (select `Choose existing sets of PAR_interval_sets`).
-
-### Inputs
-- `chromosome`: The appropriate column in the data table. This should not need to be changed.
-- `indexes`, `VCFs`: The names of the appropriate columns created in Step 6. You'll have to do `this.PAR_intervals.<column_name>`, as `PAR_interval_set` is a set of multiple `PAR_intervals`.
-	- Note: You can used the gzipped VCFs for the `VCFs` input.
-
-### Outputs
-- The outputs of running this workflow aren't stored in a data frame, but can be added to the `chromosome` data table in a new column, labeled in a similar way to how you labeled the outputs of Steps 5 and 6.
-
 ## 8. `recalibration` Workflow
 - You should run this workflow with the `chromosome` data table.
 

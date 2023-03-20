@@ -35,7 +35,7 @@ For an input reference, create a BWA index for alignment. This workflow should b
 This workflow performs alignment for a single sample, outputting a compressed CRAM file, as well as samtools stats and mosdepth stats.
 
 ### Inputs
-* `bwaIndexTar`: The appropriate karyotype-specific BWA index from [step 2](#2-bwaIndex)
+* `bwaIndexTar`: The appropriate karyotype-specific BWA index from [step 2](#2-bwaIndex-workflow)
 * `inputFastq1` and `inputFastq2`: The fastq files for the selected sample
 * `sampleName`: The name of the selected sample, to be used in output files
 * `targetRef`: The appropriate karyotype-specific reference from [step 1](#1-prepare_reference-workflow)

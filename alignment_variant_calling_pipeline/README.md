@@ -79,18 +79,21 @@ For the next step in the pipeline, you will need 25 sample maps: tab-separated f
 	* For XY samples, map `sample_id` to `XY_Y_nonPAR_hcVCF_gz` output from step 4
 	* Do not include XX samples
 
-<!-- 
-## 5. `generate_genomics_db` Workflow
-- You should run this workflow with the `PAR_interval` data table. You shouldn't need to create a new Data Table.
+## 6. `generate_genomics_db` Workflow
+For a input genomic interval, generates a GATK GenomicsDB file for a set of samples, in preparation for joint genotyping. GenomicsDB files are created in small (100kb) intervals to facilitate parellelization of joint genotyping. The intervals used in this analysis are described in the <a href="https://anvil.terra.bio/#workspaces/anvil-datastorage/AnVIL_T2T_CHRY" target="_blank">AnVIL repo</a> in the `PAR_interval` table. 
 
 ### Inputs
-- `chromosome`, `interval`, `marginedStart`, `marginedEnd`,, `regionType`: The appropriate columns from the Data Table.  These should not need to be changed.
-- `dbBucket`: The name of your bucket (i.e. the prefix of the sample map file paths).
-- `filePath`: The path to the directory containing your four sample map files from Step 4. So the full path to this directory would be `"gs://<dbBucket>/<filePath>"`
+* `filePath`: The path to the directory containing the 25 sample maps generated in [step 5](#5-creating_sample_maps)
+* `chromosome`: The chromosome of the input genomic interval
+* `marginedStart`: The margined start position of the input genomic interval
+* `marginedEnd`: The margined end position of the input genomic interval
+* `interval`: The name of the interval, to be used in output files
+* `regionType`: Either "non_PAR", "PAR1", or "PAR2" based on which of these categories the input region falls under
 
 ### Outputs
-- `genomicsDBtar`: The column in the `PAR_interval` data table to store the output to. This **SHOULD** be a new column, for whichever set of samples you chose to run. 
+* `genomicsDBtar`: A tar file containing the genomicsDB information for the input interval across the samples specified in the sample map
 
+<!-- 
 ## 6. `interval_calling` Workflow
 - You should run this workflow with the `PAR_interval` data table, same as Step 5.
 

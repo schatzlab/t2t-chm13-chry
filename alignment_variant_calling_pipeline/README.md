@@ -124,20 +124,23 @@ For a single chromosome, merges the VCFs for all intervals (from [step 7](#7-int
 * `chromosomeVCF_gz`: The gzipped output VCF for the input chromosome
 * `chromosomeVCF_tbi`: The tabix index for the output chromosome VCF
 
+## 9. `recalibration` Workflow
+For an input VCF, performs [Variant Qaulity Score Recalibration](https://gatk.broadinstitute.org/hc/en-us/articles/360036510892-VariantRecalibrator) using the GATK `VariantRecalibrator` tool with a number of different databases of human variation from the [Broad Resource bundle](https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle). You'll run this workflow on each of the chromosome VCFs generated in [step 8](#8-concat_vcfs_chromosome-workflow).
 
+### Inputs
+* `VCF`: The input VCF
+* `chromosome`: The chromosome of the input VCF
+* `refFasta`, `refIndex`, `refDict`: The unmasked reference and indicies (used as input in [step 1](#1-prepare_reference-workflow) and [step 7](#7-interval_calling-workflow))
+* `{dataBase}` and `{dataBase}_index` for each of dbdnp, hapmap, kg_mills, kg_omni, and kg_snps: The VCFs and tabix indicies respectively of the databases of "true-positive" human genetic variation available in the [Broad Resource bundle](https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle)
+
+### Outputs
+* `recalibratedVCF`: The recalibrated output VCF for the input chromosome
+* `recalibratedVCFgz`: The gzipped recalibrated output recVCF for the input chromosome
+* `recalibratedVCFtabix`: The tabix index for the recalibrated output chromosome VCF
 
 
 <!-- 
-## 8. `recalibration` Workflow
-- You should run this workflow with the `chromosome` data table.
 
-### Inputs
-- `chromosome`: The appropriate column in the data table. This should not need to be changed.
-- `VCF`: This should the be output of Step 7. You will either need to add the output of Step 7 to a new column in the `chromosome` data table, or use an absolute file path here. If you choose to use an absolute file path, you'll need to run each chromosome separately.
-- The rest of the inputs are absolute file paths to files Samantha uploaded. You should not need to change these.
-
-### Outputs
-- `recalibratedVCF`, `recalibratedVCFgz`, `recalibratedVCFtabix`: The columns in the `chromosome` data table to store the outputs to. As with Steps 5-7, these **SHOULD** be new columns, for whichever set of samples you chose to run.
 
 ## 9. `get_pass_records` Workflow
 - You should run this workflow with the `chromosome` data table.

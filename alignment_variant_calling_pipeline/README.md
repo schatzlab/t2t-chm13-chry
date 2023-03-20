@@ -4,7 +4,9 @@ This directory contains the workflows (as WDLs) used to perform alignment and va
 
 Described below is each workflow used in the pipeline, listed in order, along with the expected inputs and outputs for each.
 
+# Pipeline Steps
 ## 1. `prepare_reference` Workflow
+
 ### Inputs
 * This should all be set-up properly, assuming the workspace was simply copied.
 

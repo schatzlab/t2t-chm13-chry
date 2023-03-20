@@ -65,7 +65,7 @@ For a single sample, run the GATK `HaplotypeCaller` tool to call variants in tha
 * `XY_Y_nonPAR_hcVCF`, `XY_Y_nonPAR_hcVCF_gz`, `XY_Y_nonPAR_hcVCF_gz_tbi`: The output VCF (and index) for the non-PAR regions of chrY in XY samples. These variant calls will be haploid. If the input sample is XX, these outputs will not be created
 
 ## 5. Creating sample maps
-For the next step in the pipeline, you will need two sample maps: tab-separated files that describe the filepaths of the per-sample VCFs generated in [step 4](#4-haplotype_calling-workflow). These are described in detail below, and example sample maps are available in the `example_sample_maps` directory in this directory. Note: you CANNOT change the names of these files.
+For the next step in the pipeline, you will need 25 sample maps: tab-separated files that describe the filepaths of the per-sample VCFs generated in [step 4](#4-haplotype_calling-workflow). These are described in detail below, and example sample maps are available in the `example_sample_maps` directory in this directory. Note: you CANNOT change the names of these files.
 * `chr{1-22}_sample_map.tsv`
 	* For chr1, for example, you will create a file called `chr1_sample_map.tsv`
 	* Map `sample_id` to `chr{1-22}_hcVCF_gz` output from step 4

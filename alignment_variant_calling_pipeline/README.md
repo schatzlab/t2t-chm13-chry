@@ -6,13 +6,25 @@ Described below is each workflow used in the pipeline, listed in order, along wi
 
 # Pipeline Workflows
 ## 1. `prepare_reference` Workflow
-From a single unmasked reference, creates two sex chromosome complement-specific references (one each for XX and XY samples), along with corresponding BWA indicies. The reasoning behind using separate reference genomes for XX and XY samples is described in detail in the <a href="https://doi.org/10.1101/2022.12.01.518724" target="_blank">paper</a>, and on the <a href="https://anvil.terra.bio/#workspaces/anvil-datastorage/AnVIL_T2T_CHRY" target="_blank">AnVIL repo</a>.
+From a single unmasked reference, creates two separate masked references: one each for XX and XY samples (henceforth refered to as "karyotype-specific" references). The reasoning behind using separate reference genomes for XX and XY samples is described in detail in the <a href="https://doi.org/10.1101/2022.12.01.518724" target="_blank">paper</a> and on the <a href="https://anvil.terra.bio/#workspaces/anvil-datastorage/AnVIL_T2T_CHRY" target="_blank">AnVIL repo</a>, but briefly, it  improves alignment and variant calling on the sex chromosomes.
 
 ### Inputs
-* This should all be set-up properly, assuming the workspace was simply copied.
+* `refFasta`: The input reference genome
+* `refMask`: A bed file denoting the pseudo-autosomal regions (PARs) of both the X and Y chromosomes
+* `chrXname`: The name of the X chromosome in your reference (default "chrX")
+* `chrYname`: The name of the Y chromosome in your reference (default "chrY")
 
 ### Outputs
-* The output files should be output to a directory in the `Files` section of the `Data` tab. You can copy these to the `Workspace Data` section after running so as to more easily access them later if you want to.
+* `XXref`: XX-specific reference (chrY masked)
+* `XXrefDict`: GATK sequence dictionary for XX-specific reference
+* `XXrefIndex`: Fasta index for XX-specific reference
+* `XYref`: XY-specific reference (chrY PARs masked)
+* `XYrefDict`: GATK sequence dictionary for XY-specific reference
+* `XYrefIndex`: Fasta index for XY-specific reference
+
+## 2. `bwaIndex` Workflow
+For an input reference, create a BWA index for alignment. This workflow should be run on each of the karyotype-specific references created in [step 1](## 1. `prepare_reference` Workflow).
+
 
 ## 2. `t2t_realignment` Workflow
 - Before you run this workflow with the SGDP data, you will want to create a data table for the SGDP samples (similar to the `CHM13_HG002_Y_sample` data table). At the beginning of the pipeline, you'll only need the `sample_id`, `sex`, and `read_1_fastq` and `read_2_fastq` columns filled out.

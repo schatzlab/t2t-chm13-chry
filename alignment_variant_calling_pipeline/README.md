@@ -42,7 +42,10 @@ This workflow performs alignment for a single sample, outputting a compressed CR
 * `dedupDistance`: `distance` parameter for `samtools markdup` (default 100)
 
 ### Outputs
-- The output files can all be written to the input Data Table in the appropriate columns. For the 1KGP data, you should not need to change any of the column names.
+* `cram`: Output alignment, compressed with karyotype-specific reference
+* `cramIndex`: CRAM index for output alignment
+* `mosdepth_globalDist`, `mosdepth_regionsBed`, `mosdepth_regionsBedIndex`, `mosdepth_regionsBedIndex`, `mosdepth_regionsDist`, and `mosdepth_summary`: Output of running `mosdepth` on alignment CRAM file
+* : `samtools_stats`: Output of running `samtools stats` on alignment CRAM file
 
 ## 3. `haplotype_calling` Workflow
 - You should run this workflow with the same data table you used for Step 2.

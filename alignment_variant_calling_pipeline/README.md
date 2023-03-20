@@ -23,7 +23,7 @@ From a single unmasked reference, creates two separate masked references: one ea
 * `XYrefIndex`: Fasta index for XY-specific reference
 
 ## 2. `bwaIndex` Workflow
-For an input reference, create a BWA index for alignment. This workflow should be run on each of the karyotype-specific references created in [step 1]([## 1. `prepare_reference` Workflow](#1-prepare_reference-workflow).
+For an input reference, create a BWA index for alignment. This workflow should be run on each of the karyotype-specific references created in [step 1](#1-prepare_reference-workflow).
 
 
 ## 2. `t2t_realignment` Workflow

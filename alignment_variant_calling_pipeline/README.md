@@ -56,26 +56,27 @@ For a single sample, run the GATK `HaplotypeCaller` tool to call variants in tha
 * `nonparXbed`,`parXbed`,`parYbed`: Bed files describing the non-PAR regions of chrX, the PARs of chrX, and the PARs of chrY, respectively
 
 ### Outputs
-* `chr{1-21}_hcVCF`: The output VCF for for each autosomal chromosome. These variant calls will be diploid
-* `chr{1-21}_hcVCF_gz`: The gzipped output VCF for each autosome
-* `chr{1-21}_hcVCF_gz_tbi`: The tabix index for each output autosome VCF
+* `chr{1-22}_hcVCF`: The output VCF for for each autosomal chromosome. These variant calls will be diploid
+* `chr{1-22}_hcVCF_gz`: The gzipped output VCF for each autosome
+* `chr{1-22}_hcVCF_gz_tbi`: The tabix index for each output autosome VCF
 * `XX_X_hcVCF`, `XX_X_hcVCF_gz`, `XX_X_hcVCF_gz_tbi`: The output VCF (and index) for chrX in XX samples. These variant calls will be diploid. If the input sample is XY, these outputs will not be created
 * `XY_X_non_PAR_hcVCF`, `XY_X_non_PAR_hcVCF_gz`, `XY_X_non_PAR_hcVCF_gz_tbi`: The output VCF (and index) for the non-PAR regions of chrX in XY samples. These variant calls will be haploid. If the input sample is XX, these outputs will not be created
 * `XY_X_PAR_hcVCF`, `XY_X_PAR_hcVCF_gz`, `XY_X_PAR_hcVCF_gz_tbi`: The output VCF (and index) for the chrX PARs in XY samples. These variant calls will be diploid because, in our analysis, the chrX PARs represent variation originating from both the chrX PARs and chrY PARs. If the input sample is XX, these outputs will not be created
 * `XY_Y_nonPAR_hcVCF`, `XY_Y_nonPAR_hcVCF_gz`, `XY_Y_nonPAR_hcVCF_gz_tbi`: The output VCF (and index) for the non-PAR regions of chrY in XY samples. These variant calls will be haploid. If the input sample is XX, these outputs will not be created
 
 ## 4. Creating sample maps
-For the next step in the pipeline, you will need four sample maps: tab-separated files that describe the filepaths of the per-sample VCFs generated in [step 4](#4-haplotype_calling-workflow). These are described in detail below, and example sample maps are available in the `example_sample_maps` directory in this directory.
-* `chrX_PAR1_sample_map.tsv`
-	* For XY samples, map `sample_id` to `XY_X_PAR_hcVCF_gz` output from Step 3
-	* For XX samples, map `sample_id` to `XX_X_hcVCF_gz` output from Step 3
-* `chrX_PAR2_sample_map.tsv`
-	* Same as above
+For the next step in the pipeline, you will need two sample maps: tab-separated files that describe the filepaths of the per-sample VCFs generated in [step 4](#4-haplotype_calling-workflow). These are described in detail below, and example sample maps are available in the `example_sample_maps` directory in this directory. Note: you CANNOT change the names of these files.
+* `chr{1-22}_sample_map.tsv`
+	* For chr1, for example, you will create a file called `chr1_sample_map.tsv`
+	* Map `sample_id` to `chr{1-22}_hcVCF_gz` output from step 4
+* `chrX_PAR_sample_map.tsv`
+	* For XY samples, map `sample_id` to `XY_X_PAR_hcVCF_gz` output from step 4
+	* For XX samples, map `sample_id` to `XX_X_hcVCF_gz` output from step 4
 * `chrX_non_PAR_sample_map.tsv`
-	* For XY samples, map `sample_id` to `XY_X_non_PAR_hcVCF_gz` output from Step 3
-	* For XX samples, map `sample_id` to `XX_X_hcVCF_gz` output from Step 3
+	* For XY samples, map `sample_id` to `XY_X_non_PAR_hcVCF_gz` output from step 4
+	* For XX samples, map `sample_id` to `XX_X_hcVCF_gz` output from step 4
 * `chrY_sample_map.tsv`
-	* For XY samples, map `sample_id` to `XY_Y_nonPAR_hcVCF_gz` output from Step 3
+	* For XY samples, map `sample_id` to `XY_Y_nonPAR_hcVCF_gz` output from step 4
 	* Do not include XX samples
 
 <!-- 

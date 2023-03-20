@@ -1,4 +1,8 @@
-# T2T Alignment and Variant Calling Pipeline
+# T2T-CHM13v2.0 Alignment and Variant Calling Pipeline
+
+This directory contains the workflows (as WDLs) used to perform alignment and variant calling on the T2T-CHM13v2.0 reference. The entire pipeline was run on the AnVIL cloud computing platform. For our paper (<a href="https://doi.org/10.1101/2022.12.01.518724" target="_blank">The complete sequence of a human Y chromosome</a>), we performed alignment and variant calling for all 3202 samples from the 1000 Genomes Project (1KGP) as well as 279 samples from the Simons Genome Diversity Project (SGDP). Alignments and variant calls (as well as statistics, metadata, and other resources) for both of these datasets are available from our <a href="https://anvil.terra.bio/#workspaces/anvil-datastorage/AnVIL_T2T_CHRY" target="_blank">public T2T-chrY AnVIL repository</a>.
+
+Described below is each workflow used in the pipeline, listed in order, along with the expected inputs and outputs for each.
 
 ## 1. `prepare_reference` Workflow
 ### Inputs

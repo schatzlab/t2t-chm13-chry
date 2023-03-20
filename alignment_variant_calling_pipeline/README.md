@@ -4,8 +4,9 @@ This directory contains the workflows (as WDLs) used to perform alignment and va
 
 Described below is each workflow used in the pipeline, listed in order, along with the expected inputs and outputs for each.
 
-# Pipeline Steps
+# Pipeline Workflows
 ## 1. `prepare_reference` Workflow
+From a single unmasked reference, creates two sex chromosome complement-specific references (one each for XX and XY samples), along with corresponding BWA indicies. The reasoning behind using separate reference genomes for XX and XY samples is described in detail in the <a href="https://doi.org/10.1101/2022.12.01.518724" target="_blank">paper</a>, and on the <a href="https://anvil.terra.bio/#workspaces/anvil-datastorage/AnVIL_T2T_CHRY" target="_blank">AnVIL repo</a>.
 
 ### Inputs
 * This should all be set-up properly, assuming the workspace was simply copied.

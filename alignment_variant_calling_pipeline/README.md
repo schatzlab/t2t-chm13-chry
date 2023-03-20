@@ -32,15 +32,14 @@ For an input reference, create a BWA index for alignment. This workflow should b
 * `bwa_index`: The BWA index for the input reference
 
 ## 3. `t2t_realignment` Workflow
-- Before you run this workflow with the SGDP data, you will want to create a data table for the SGDP samples (similar to the `CHM13_HG002_Y_sample` data table). At the beginning of the pipeline, you'll only need the `sample_id`, `sex`, and `read_1_fastq` and `read_2_fastq` columns filled out.
-- You should run this workflow with a data table input (either the original `CHM13_HG002_Y_sample` data table for 1KGP, or the data table you made for SGDP).
-- You'll have to run this workflow separately for XX and XY samples. You can select a subset of samples with the `SELECT DATA` button. (HINT: you can use the same subset of samples later by selecting `Choose existing sets of <Data Table>` after clicking `SELECT DATA`).
+This workflow performs alignment for a single sample, outputting a compressed CRAM file, as well as samtools stats and mosdepth stats.
 
 ### Inputs
-- `bwaIndexTar`: Output of Step 1. Will be either XX or XY specific. Either an absolute file path, or the path from Workspace, if you moved the files there (something like `workspace.chm13v2_XX_bwaIndex`)
-- `inputFastq1` and `inputFastq2`: The appropriate columns from your chosen Data Table. For the 1KGP Data Table, `this.read_1_fastq` and `this.read_2_fastq`.
-- `sampleName`: The appropriate columns from your chosen Data Table. For the 1KGP Data Table `this.CHM13_HG002_Y_sample_id`.
-- `targetRef`: Output of Step 1. Will be either XX or XY specific. Again, this can always either be an absolute file path, or the path from Workspace, if you moved the files there.
+* `bwaIndexTar`: The appropriate karyotype-specific BWA index from [step 2](#2-bwaIndex)
+* `inputFastq1` and `inputFastq2`: The fastq files for the selected sample
+* `sampleName`: The name of the selected sample, to be used in output files
+* `targetRef`: The appropriate karyotype-specific reference from [step 1](#1-prepare_reference-workflow)
+* `dedupDistance`: `distance` parameter for `samtools markdup` (default 100)
 
 ### Outputs
 - The output files can all be written to the input Data Table in the appropriate columns. For the 1KGP data, you should not need to change any of the column names.

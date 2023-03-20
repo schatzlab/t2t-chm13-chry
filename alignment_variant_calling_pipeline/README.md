@@ -44,7 +44,7 @@ This workflow performs alignment for a single sample, outputting a compressed CR
 ### Outputs
 * `cram`: Output alignment, compressed with karyotype-specific reference
 * `cramIndex`: CRAM index for output alignment
-* `mosdepth_globalDist`, `mosdepth_regionsBed`, `mosdepth_regionsBedIndex`, `mosdepth_regionsBedIndex`, `mosdepth_regionsDist`, and `mosdepth_summary`: Output of running `mosdepth` on alignment CRAM file
+* `mosdepth_globalDist`, `mosdepth_regionsBed`, `mosdepth_regionsBedIndex`, `mosdepth_regionsDist`, and `mosdepth_summary`: Output of running `mosdepth` on alignment CRAM file
 * : `samtools_stats`: Output of running `samtools stats` on alignment CRAM file
 
 ## 3. `haplotype_calling` Workflow

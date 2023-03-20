@@ -83,7 +83,7 @@ For the next step in the pipeline, you will need 25 sample maps: tab-separated f
 For a input genomic interval, generates a GATK GenomicsDB file for a set of samples, in preparation for joint genotyping. GenomicsDB files are created in small (100kb) intervals to facilitate parellelization of joint genotyping. The intervals used in this analysis are described in the <a href="https://anvil.terra.bio/#workspaces/anvil-datastorage/AnVIL_T2T_CHRY" target="_blank">AnVIL repo</a> in the `PAR_interval` table. 
 
 ### Inputs
-* `filePath`: The path to the directory containing the 25 sample maps generated in [step 5](#5-creating_sample_maps)
+* `filePath`: The path to the directory containing the 25 sample maps generated in [step 5](#5-creating-sample-maps)
 * `chromosome`: The chromosome of the input genomic interval
 * `marginedStart`: The margined start position of the input genomic interval
 * `marginedEnd`: The margined end position of the input genomic interval
@@ -92,6 +92,9 @@ For a input genomic interval, generates a GATK GenomicsDB file for a set of samp
 
 ### Outputs
 * `genomicsDBtar`: A tar file containing the genomicsDB information for the input interval across the samples specified in the sample map
+
+
+
 
 <!-- 
 ## 6. `interval_calling` Workflow

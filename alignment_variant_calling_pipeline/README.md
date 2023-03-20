@@ -25,8 +25,13 @@ From a single unmasked reference, creates two separate masked references: one ea
 ## 2. `bwaIndex` Workflow
 For an input reference, create a BWA index for alignment. This workflow should be run on each of the karyotype-specific references created in [step 1](#1-prepare_reference-workflow).
 
+### Inputs
+* `fasta`: The input reference genome
 
-## 2. `t2t_realignment` Workflow
+### Outputs
+* `bwa_index`: The BWA index for the input reference
+
+## 3. `t2t_realignment` Workflow
 - Before you run this workflow with the SGDP data, you will want to create a data table for the SGDP samples (similar to the `CHM13_HG002_Y_sample` data table). At the beginning of the pipeline, you'll only need the `sample_id`, `sex`, and `read_1_fastq` and `read_2_fastq` columns filled out.
 - You should run this workflow with a data table input (either the original `CHM13_HG002_Y_sample` data table for 1KGP, or the data table you made for SGDP).
 - You'll have to run this workflow separately for XX and XY samples. You can select a subset of samples with the `SELECT DATA` button. (HINT: you can use the same subset of samples later by selecting `Choose existing sets of <Data Table>` after clicking `SELECT DATA`).

@@ -138,7 +138,7 @@ For an input VCF, performs <a href="https://gatk.broadinstitute.org/hc/en-us/art
 * `recalibratedVCFgz`: The gzipped recalibrated output VCF for the input chromosome
 * `recalibratedVCFtabix`: The tabix index for the recalibrated output chromosome VCF
 
-## 9. `get_pass_records` Workflow
+## 10. `get_pass_records` Workflow
 Using an input recalibrated VCF file from [step 9](#9-recalibration-workflow), filters to only high-quality "PASS" variants to produce a final VCF.
 
 ### Inputs

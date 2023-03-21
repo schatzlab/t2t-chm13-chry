@@ -125,7 +125,7 @@ For a single chromosome, merges the VCFs for all intervals (from [step 7](#7-int
 * `chromosomeVCF_tbi`: The tabix index for the output chromosome VCF
 
 ## 9. `recalibration` Workflow
-For an input VCF, performs <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360036510892-VariantRecalibrator" target="_blank">Variant Quality Score Recalibration</a> using the GATK `VariantRecalibrator` tool with a number of different databases of human variation from the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle" target="_blank">Broad Resource bundle</a>. You'll run this workflow on each of the chromosome VCFs generated in [step 8](#8-concat_vcfs_chromosome-workflow).
+For an input VCF, performs <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360036510892-VariantRecalibrator" target="_blank">Variant Quality Score Recalibration</a> using the GATK `VariantRecalibrator`and `ApplyVQSR` tools with a number of different databases of human variation from the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle" target="_blank">Broad Resource bundle</a>. This will identify a set of high-quality "PASS" variants within the input VCF (but will not filter the VCF yet). You'll run this workflow on each of the chromosome VCFs generated in [step 8](#8-concat_vcfs_chromosome-workflow).
 
 ### Inputs
 * `VCF`: The input VCF
@@ -135,20 +135,17 @@ For an input VCF, performs <a href="https://gatk.broadinstitute.org/hc/en-us/art
 
 ### Outputs
 * `recalibratedVCF`: The recalibrated output VCF for the input chromosome
-* `recalibratedVCFgz`: The gzipped recalibrated output recVCF for the input chromosome
+* `recalibratedVCFgz`: The gzipped recalibrated output VCF for the input chromosome
 * `recalibratedVCFtabix`: The tabix index for the recalibrated output chromosome VCF
 
-
-<!-- 
-
-
 ## 9. `get_pass_records` Workflow
-- You should run this workflow with the `chromosome` data table.
+Using an input recalibrated VCF file from [step 9](#9-recalibration-workflow), filters to only high-quality "PASS" variants to produce a final VCF.
 
 ### Inputs
-- `inputVCFgz`: The name of the appropriate column created in Step 8.
+* `inputVCFgz`: The input gzipped recalibrated VCF from [step 9](#9-recalibration-workflow)
 
 ### Outputs
-- `pass_bgzip`, `pass_index`, `pass_stats`, `passVCF`:  The columns in the `chromosome` data table to store the outputs to. As with previous steps, these **SHOULD** be new columns, for whichever set of samples you chose to run.
-- 
--->
+* `passVCF`: The PASS-filtered output VCF
+* `pass_bgzip`: The gzipped PASS-filtered output VCF
+* `pass_index`: The tabix index for the PASS-filtered output VCF
+* `pass_stats`: The output of running `bcftools stats` on the PASS-filtered output VCF

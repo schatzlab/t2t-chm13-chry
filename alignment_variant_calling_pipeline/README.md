@@ -125,13 +125,13 @@ For a single chromosome, merges the VCFs for all intervals (from [step 7](#7-int
 * `chromosomeVCF_tbi`: The tabix index for the output chromosome VCF
 
 ## 9. `recalibration` Workflow
-For an input VCF, performs [Variant Qaulity Score Recalibration](https://gatk.broadinstitute.org/hc/en-us/articles/360036510892-VariantRecalibrator) using the GATK `VariantRecalibrator` tool with a number of different databases of human variation from the [Broad Resource bundle](https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle). You'll run this workflow on each of the chromosome VCFs generated in [step 8](#8-concat_vcfs_chromosome-workflow).
+For an input VCF, performs <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360036510892-VariantRecalibrator" target="_blank">Variant Qaulity Score Recalibration</a> using the GATK `VariantRecalibrator` tool with a number of different databases of human variation from the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle" target="_blank">Broad Resource bundle</a>. You'll run this workflow on each of the chromosome VCFs generated in [step 8](#8-concat_vcfs_chromosome-workflow).
 
 ### Inputs
 * `VCF`: The input VCF
 * `chromosome`: The chromosome of the input VCF
 * `refFasta`, `refIndex`, `refDict`: The unmasked reference and indicies (used as input in [step 1](#1-prepare_reference-workflow) and [step 7](#7-interval_calling-workflow))
-* `{dataBase}` and `{dataBase}_index` for each of dbdnp, hapmap, kg_mills, kg_omni, and kg_snps: The VCFs and tabix indicies respectively of the databases of "true-positive" human genetic variation available in the [Broad Resource bundle](https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle)
+* `{dataBase}` and `{dataBase}_index` for each of dbdnp, hapmap, kg_mills, kg_omni, and kg_snps: The VCFs and tabix indicies respectively of the databases of "true-positive" human genetic variation available in the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle" target="_blank">Broad Resource bundle</a>
 
 ### Outputs
 * `recalibratedVCF`: The recalibrated output VCF for the input chromosome

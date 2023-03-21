@@ -125,7 +125,7 @@ For a single chromosome, merges the VCFs for all intervals (from [step 7](#7-int
 * `chromosomeVCF_tbi`: The tabix index for the output chromosome VCF
 
 ## 9. `recalibration` Workflow
-For an input VCF, performs <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360036510892-VariantRecalibrator" target="_blank">Variant Qaulity Score Recalibration</a> using the GATK `VariantRecalibrator` tool with a number of different databases of human variation from the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle" target="_blank">Broad Resource bundle</a>. You'll run this workflow on each of the chromosome VCFs generated in [step 8](#8-concat_vcfs_chromosome-workflow).
+For an input VCF, performs <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360036510892-VariantRecalibrator" target="_blank">Variant Quality Score Recalibration</a> using the GATK `VariantRecalibrator` tool with a number of different databases of human variation from the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle" target="_blank">Broad Resource bundle</a>. You'll run this workflow on each of the chromosome VCFs generated in [step 8](#8-concat_vcfs_chromosome-workflow).
 
 ### Inputs
 * `VCF`: The input VCF

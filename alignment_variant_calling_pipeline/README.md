@@ -131,7 +131,7 @@ For an input VCF, performs <a href="https://gatk.broadinstitute.org/hc/en-us/art
 * `VCF`: The input VCF
 * `chromosome`: The chromosome of the input VCF
 * `refFasta`, `refIndex`, `refDict`: The unmasked reference and indicies (used as input in [step 1](#1-prepare_reference-workflow) and [step 7](#7-interval_calling-workflow))
-* `{dataBase}` and `{dataBase}_index` for each of dbdnp, hapmap, kg_mills, kg_omni, and kg_snps: The VCFs and tabix indicies respectively of the databases of "true-positive" human genetic variation available in the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle" target="_blank">Broad Resource bundle. These VCFs were lifted from GRCh38 to T2T-CHM13v2.0 and are available for download <a href="https://s3-us-west-2.amazonaws.com/human-pangenomics/index.html?prefix=T2T/CHM13/assemblies/variants/GATK_CHM13v2.0_Resource_Bundle/" target="_blank">here</a>
+* `{dataBase}` and `{dataBase}_index` for each of dbdnp, hapmap, kg_mills, kg_omni, and kg_snps: The VCFs and tabix indicies respectively of the databases of "true-positive" human genetic variation available in the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle" target="_blank">Broad Resource bundle</a>. These VCFs were lifted from GRCh38 to T2T-CHM13v2.0 and are available for download <a href="https://s3-us-west-2.amazonaws.com/human-pangenomics/index.html?prefix=T2T/CHM13/assemblies/variants/GATK_CHM13v2.0_Resource_Bundle/" target="_blank">here</a>
 
 ### Outputs
 * `recalibratedVCF`: The recalibrated output VCF for the input chromosome

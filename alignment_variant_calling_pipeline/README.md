@@ -131,7 +131,12 @@ For an input VCF, performs <a href="https://gatk.broadinstitute.org/hc/en-us/art
 * `VCF`: The input VCF
 * `chromosome`: The chromosome of the input VCF
 * `refFasta`, `refIndex`, `refDict`: The unmasked reference and indicies (used as input in [step 1](#1-prepare_reference-workflow) and [step 7](#7-interval_calling-workflow))
-* `{dataBase}` and `{dataBase}_index` for each of dbdnp, hapmap, kg_mills, kg_omni, and kg_snps: The VCFs and tabix indicies respectively of the databases of "true-positive" human genetic variation available in the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle" target="_blank">Broad Resource bundle</a>. These VCFs were lifted from GRCh38 to T2T-CHM13v2.0 and are available for download <a href="https://s3-us-west-2.amazonaws.com/human-pangenomics/index.html?prefix=T2T/CHM13/assemblies/variants/GATK_CHM13v2.0_Resource_Bundle/" target="_blank">here</a>
+* `{dataBase}` and `{dataBase}_index` for each of dbdnp, hapmap, kg_mills, kg_omni, and kg_snps: The VCFs and tabix indicies respectively of the databases of "true-positive" human genetic variation available in the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890811-Resource-bundle" target="_blank">Broad Resource bundle</a>. The resource bundle was lifted from GRCh38 to T2T-CHM13v2.0 and VCFs are available for download <a href="https://s3-us-west-2.amazonaws.com/human-pangenomics/index.html?prefix=T2T/CHM13/assemblies/variants/GATK_CHM13v2.0_Resource_Bundle/" target="_blank">here</a>. The VCFs used for this step are as follows:
+	* dbsnp:  resources-broad-hg38-v0-Homo_sapiens_assembly38.dbsnp138.t2t-chm13-v2.0.vcf.gz
+ 	* hapmap:  resources-broad-hg38-v0-hapmap_3.3.hg38.t2t-chm13-v2.0.vcf.gz
+	* kg_mills:  resources-broad-hg38-v0-Mills_and_1000G_gold_standard.indels.hg38.t2t-chm13-v2.0.vcf.gz
+	* kg_omni:  resources-broad-hg38-v0-1000G_omni2.5.hg38.t2t-chm13-v2.0.vcf.gz
+	* kg_snps:  resources-broad-hg38-v0-1000G_phase1.snps.high_confidence.hg38.t2t-chm13-v2.0.vcf.gz
 
 ### Outputs
 * `recalibratedVCF`: The recalibrated output VCF for the input chromosome
